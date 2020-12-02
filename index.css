@@ -1,0 +1,14 @@
+* { font-family: 'Roboto', sans-serif; }
+
+table th:nth-child(1) { width: 60px; }
+table th { width: 80px; text-align: start;}
+table td { padding-top: 8px;}
+.add { 
+  display: flex; 
+  justify-content: start;
+  align-items: center;
+}
+.pd-r {
+  padding-right: 10px;
+}
+
