@@ -71,6 +71,9 @@ const contents = {
                     )}
                 </select>
             </td>
+            <td>
+              <input type='text' id='memo' placeholder='기타 요구 사항' />      
+            </td>
           </tr>`
           ).join('\n')}
         </table>
