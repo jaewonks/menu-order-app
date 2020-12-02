@@ -1,39 +1,45 @@
-const contents = {
-  after_render: () => {
-    document.getElementById('add-member-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const newMember = document.getElementById('name').value;
-      members.push(newMember);
-      console.log(members);
-    });
-  },
-  render: () => {  
-    const members = ['재원', '정령', '하나', '한나', '정옥', '서진', '혜원', '재은'];
-    const menus = [
-      'Gyoza',
-      'Breaded Prawn',
-      'Spring Rolls',
-      'Katsu Curry - Chicken',
-      'Katsu Curry - Pumpkin',
-      'Katsu Curry - Prawn',
-      'Sweet Chilli Chicken',
-      'Crispy Soy Chicken',
-      'Kimchi Fried Rice',
-      'Spicy Katsu Ramen - Chicken',
-      'Spicy Katsu Ramen - Pumkin',
-      'Spicy Chicken',
-      'Soy Beef',
-      'Spicy Pork Belly',
-      'Teriyaki - Ckicken',
-      'Teriyaki - Tofu',
-      'Bibimbab - Beef',
-      'Bibimbab - Chicken',
-      'Bibimbab - Kimchi',
-      'Bibimbab - Tofu'
-    ];
+const members = ['재원', '정령', '하나', '한나', '정옥', '서진', '혜원', '재은', '민아'];
+const menus = [
+  'Gyoza',
+  'Breaded Prawn',
+  'Spring Rolls',
+  'Katsu Curry - Chicken',
+  'Katsu Curry - Pumpkin',
+  'Katsu Curry - Prawn',
+  'Sweet Chilli Chicken',
+  'Crispy Soy Chicken',
+  'Kimchi Fried Rice',
+  'Spicy Katsu Ramen - Chicken',
+  'Spicy Katsu Ramen - Pumkin',
+  'Spicy Chicken',
+  'Soy Beef',
+  'Spicy Pork Belly',
+  'Teriyaki - Ckicken',
+  'Teriyaki - Tofu',
+  'Bibimbab - Beef',
+  'Bibimbab - Chicken',
+  'Bibimbab - Kimchi',
+  'Bibimbab - Tofu'
+];
 
-    const drinks = ['Sprite', 'Fanta', 'Coke', 'Diet Coke', 'Still Water', 'Sparking Water'];
-   
+const drinks = ['Sprite', 'Fanta', 'Coke', 'Diet Coke', 'Still Water', 'Sparking Water'];
+
+window.onload = () => {
+  document.getElementById('add-member-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const newMember = document.getElementById('name').value;
+    if (newMember !== '') {
+      members.push(newMember);
+      app.innerHTML = contents.render();
+      // console.log(members);
+    }
+  });
+}  
+
+
+const contents = {
+  render: () => {  
+    
     return `
       <h3>Menu Order App</h3>
       <div class='add'>
@@ -72,7 +78,7 @@ const contents = {
                 </select>
             </td>
             <td>
-              <input type='text' id='memo' placeholder='기타 요구 사항' />      
+              <input type='text' placeholder='기타 요구 사항' />      
             </td>
           </tr>`
           ).join('\n')}
@@ -105,6 +111,9 @@ const contents = {
 const app = document.getElementById('app');
 app.innerHTML = contents.render();
 
+document.getElementById('add-member-form').addEventListener('submit', async (e) => {
+  e.preventDefault(); 
+})
 
 
   
