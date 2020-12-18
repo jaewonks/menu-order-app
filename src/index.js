@@ -7,7 +7,6 @@ window.onload = () => {
     if (newMember !== '') {
       members.push(newMember);
       localStorage.setItem('addMember', JSON.stringify(members));
-      app.innerHTML = contents.render();
     }
   });
   
@@ -28,6 +27,7 @@ window.onload = () => {
       setOrder.push(setOrderInfo);
       console.log(setOrder);
       localStorage.setItem('orderInfo', JSON.stringify(setOrder));
+      location.reload();
     })
   })
 }  

@@ -1,24 +1,4 @@
-import { members, menus, drinks } from './data.js';
-const orderMenuList = []; 
-const orderDrinkList = [];
-let countIf;
-
-window.onload = () => {
-
-/*   const menuArray = Array.from(document.getElementsByClassName('menu-list'));
-  menuArray.map( menu => menu.addEventListener('change', async (e) => {
-    e.preventDefault();
-    const orderMenu = menu.value;
-    orderMenuList.push(orderMenu);
-    countIf = orderMenuList.reduce((t, i) => { 
-      t[i] = (t[i] || 0) + 1 
-      return t }, {}); 
-      console.log(countIf);
-      console.log(new Set(orderList));;
-      localStorage.setItem('ordermenus', JSON.stringify(countIf));
-      result.innerHTML = lists.render();
-  }));*/
-}   
+import { menus, drinks } from './data.js';
 
 const lists = {
   render: () => { 
