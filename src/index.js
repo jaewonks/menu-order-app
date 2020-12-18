@@ -10,6 +10,27 @@ window.onload = () => {
       app.innerHTML = contents.render();
     }
   });
+  
+  const setOrder = [];
+  const setOrderInfo = {};
+  const menuArray = Array.from(document.getElementsByClassName('menu-list'));
+    menuArray.map((menu, index) => menu.addEventListener('change', async (e) => {
+    e.preventDefault();
+    // setOrderInfo.memu = menu.value;
+    const orderMenu = menu.value;
+    setOrderInfo.id = index;
+    setOrderInfo.memu = orderMenu;
+    console.log(setOrderInfo);
+  }))
+
+  const drinkArray = Array.from(document.getElementsByClassName('drink-list'));
+    drinkArray.map( drink => drink.addEventListener('change', async (e) => {
+    e.preventDefault();
+    const orderDrink = drink.value;
+    setOrderInfo.drink = orderDrink;
+    setOrder.push(setOrderInfo);
+    console.log(setOrder);  
+  }))
 }  
 
 const contents = {
@@ -51,6 +72,7 @@ const contents = {
         </table>
         <br>
         </div>
+        <div><button type='submit'>제출</buttion></div>
         <br>
         <hr/>
     `;
