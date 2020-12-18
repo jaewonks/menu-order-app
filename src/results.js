@@ -4,7 +4,8 @@ const orderDrinkList = [];
 let countIf;
 
 window.onload = () => {
-  const menuArray = Array.from(document.getElementsByClassName('menu-list'));
+
+/*   const menuArray = Array.from(document.getElementsByClassName('menu-list'));
   menuArray.map( menu => menu.addEventListener('change', async (e) => {
     e.preventDefault();
     const orderMenu = menu.value;
@@ -16,31 +17,37 @@ window.onload = () => {
       console.log(new Set(orderList));;
       localStorage.setItem('ordermenus', JSON.stringify(countIf));
       result.innerHTML = lists.render();
-  }));
-
-  const drinkArray = Array.from(document.getElementsByClassName('drink-list'));
-  drinkArray.map( drink => drink.addEventListener('change', async (e) => {
-    e.preventDefault();
-    const orderDrink = drink.value;
-    orderDrinkList.push(orderDrink);
-    countIf = orderDrinkList.reduce((t, i) => { 
-      t[i] = (t[i] || 0) + 1 
-      return t }, {}); 
-      localStorage.setItem('orderdrinks', JSON.stringify(countIf));
-      result.innerHTML = lists.render();
-  }));
-}  
+  }));*/
+}   
 
 const lists = {
   render: () => { 
-    let menusArray = localStorage.getItem('ordermenus') ? 
-    JSON.parse(localStorage.getItem('ordermenus')) : [];
-    let drinksArray = localStorage.getItem('orderdrinks') ?
-    JSON.parse(localStorage.getItem('orderdrinks')) : [];
+    let orderArray = localStorage.getItem('orderInfo') ? 
+    JSON.parse(localStorage.getItem('orderInfo')) : [];
+    let menusArray;
+    let drinksArray;
+    const menuGetArray = orderArray.map(arr => 
+      arr.menu
+    );
+    console.log(menuGetArray);
+    menusArray = menuGetArray.reduce((or, i) => {
+      or[i] = (or[i] || 0) + 1
+      return or }, {});
+    console.log(menusArray);  
+
+    const drinkGetArray = orderArray.map(arr => 
+      arr.drink
+    );
+    console.log(drinkGetArray);
+    drinksArray = drinkGetArray.reduce((or, i) => {
+      or[i] = (or[i] || 0) + 1
+      return or }, {});
+    console.log(drinksArray);  
+
     return `
         <br>
         <div>
-          <p>Total Order Member : </p>
+          <p>Total Order Member : ${Object.values(orderArray).length}</p>
           <p>Total Order Menu List : </p>
         </div>
         <div class='order'>
@@ -57,10 +64,8 @@ const lists = {
             ).join('\n')}
             <tr>
               <td>Total Order : </td>
-              <td>
-              ${Object.keys(menusArray).reduce((sum, key) => 
-                { return  sum + parseInt(menusArray[key])}, 0 )}
-              </td>
+              <td>${Object.keys(menusArray).reduce((sum, key) => 
+                { return  sum + parseInt(menusArray[key])}, 0 )}</td>
             </tr>
           </table>
         </div>  
@@ -72,16 +77,14 @@ const lists = {
             <th>QTY</th>
           </tr> 
           ${Object.keys(drinksArray).map(key =>
-          `<tr><td>${drinks[key]}</td>
-          <td>${drinksArray[key]}</td></tr>
-          `
-          ).join('\n')}
+            `<tr><td>${drinks[key]}</td>
+            <td>${drinksArray[key]}</td></tr>
+            `
+            ).join('\n')}
           <tr>
             <td>Total Order : </td>
-            <td>
-            ${Object.keys(drinksArray).reduce((sum, key) => 
-              { return  sum + parseInt(drinksArray[key])}, 0 )}
-            </td>
+            <td>${Object.keys(drinksArray).reduce((sum, key) => 
+              { return  sum + parseInt(drinksArray[key])}, 0 )}</td>
           </tr>
         </table>
         </div>  

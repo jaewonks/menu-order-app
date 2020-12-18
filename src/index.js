@@ -12,25 +12,24 @@ window.onload = () => {
   });
   
   const setOrder = [];
-  const setOrderInfo = {};
-  const menuArray = Array.from(document.getElementsByClassName('menu-list'));
-    menuArray.map((menu, index) => menu.addEventListener('change', async (e) => {
-    e.preventDefault();
-    // setOrderInfo.memu = menu.value;
-    const orderMenu = menu.value;
-    setOrderInfo.id = index;
-    setOrderInfo.memu = orderMenu;
-    console.log(setOrderInfo);
-  }))
 
-  const drinkArray = Array.from(document.getElementsByClassName('drink-list'));
-    drinkArray.map( drink => drink.addEventListener('change', async (e) => {
+  document.getElementById('submit-button').addEventListener('click', (e) => {
     e.preventDefault();
-    const orderDrink = drink.value;
-    setOrderInfo.drink = orderDrink;
-    setOrder.push(setOrderInfo);
-    console.log(setOrder);  
-  }))
+    const orderInfo = Array.from(document.getElementsByClassName('order-info'));
+    orderInfo.map((oi, index) => {
+      console.log(oi)
+      const menuList = Array.from(document.getElementsByClassName('menu-list'));
+      const drinkList = Array.from(document.getElementsByClassName('drink-list'));
+      const setOrderInfo = {};
+      setOrderInfo.id = index; 
+      setOrderInfo.menu = menuList[index].value;
+      setOrderInfo.drink = drinkList[index].value;
+      console.log(setOrderInfo);  
+      setOrder.push(setOrderInfo);
+      console.log(setOrder);
+      localStorage.setItem('orderInfo', JSON.stringify(setOrder));
+    })
+  })
 }  
 
 const contents = {
@@ -46,7 +45,7 @@ const contents = {
           <th>음료수</th>
           ${memberArray.map( member => 
             `
-          <tr>
+          <tr class='order-info'>
           <td>${member}</td>
               <td>
                 <select class="menu-list">
@@ -72,7 +71,7 @@ const contents = {
         </table>
         <br>
         </div>
-        <div><button type='submit'>제출</buttion></div>
+        <div><button type='button' id='submit-button' >제출</buttion></div>
         <br>
         <hr/>
     `;
