@@ -1,7 +1,7 @@
 * { font-family: 'Roboto', sans-serif; }
 
-table th:nth-child(1) { width: 60px; }
-table th { width: 80px; text-align: start;}
+.first th:nth-child(1) { width: 60px; }
+table th { width: 120px; text-align: start;}
 table td { padding-top: 8px;}
 .add { 
   display: flex; 
@@ -11,4 +11,8 @@ table td { padding-top: 8px;}
 .pd-r {
   padding-right: 10px;
 }
-
+.order {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+}

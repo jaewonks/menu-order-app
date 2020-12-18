@@ -1,69 +1,35 @@
-const members = ['재원', '정령', '하나', '한나', '정옥', '서진', '혜원', '재은', '민아'];
-const menus = [
-  'Gyoza',
-  'Breaded Prawn',
-  'Spring Rolls',
-  'Katsu Curry - Chicken',
-  'Katsu Curry - Pumpkin',
-  'Katsu Curry - Prawn',
-  'Sweet Chilli Chicken',
-  'Crispy Soy Chicken',
-  'Kimchi Fried Rice',
-  'Spicy Katsu Ramen - Chicken',
-  'Spicy Katsu Ramen - Pumkin',
-  'Spicy Chicken',
-  'Soy Beef',
-  'Spicy Pork Belly',
-  'Teriyaki - Ckicken',
-  'Teriyaki - Tofu',
-  'Bibimbab - Beef',
-  'Bibimbab - Chicken',
-  'Bibimbab - Kimchi',
-  'Bibimbab - Tofu'
-];
-
-const drinks = ['Sprite', 'Fanta', 'Coke', 'Diet Coke', 'Still Water', 'Sparking Water'];
+import { members, menus, drinks } from './data.js';
 
 window.onload = () => {
-  document.getElementById('add-member-form').addEventListener('submit', async (e) => {
+  document.getElementById('name-add-button').addEventListener('click', e => {
     e.preventDefault();
     const newMember = document.getElementById('name').value;
     if (newMember !== '') {
       members.push(newMember);
+      localStorage.setItem('addMember', JSON.stringify(members));
       app.innerHTML = contents.render();
-      // console.log(members);
     }
   });
 }  
 
-
 const contents = {
   render: () => {  
-    
+    let memberArray = localStorage.getItem('addMember') ? 
+    JSON.parse(localStorage.getItem('addMember')) : members;
     return `
-      <h3>Menu Order App</h3>
-      <div class='add'>
-        <div class='pd-r'>
-        <form id='add-member-form'>
-          <input type='text' id='name' placeholder='Input your name' />
-          <button type='submit'>추가</button>
-        </form>
-        </div>
-        <div><button>Reset</button></div>
-      </div>
       <br>
       <div>
-        <table>
+        <table class='first'>
           <th>이름</th>
           <th>음식</th>
           <th>음료수</th>
-          ${members.map( member => 
+          ${memberArray.map( member => 
             `
           <tr>
           <td>${member}</td>
               <td>
-                <select id="menu-list">
-                  <option selected>메뉴을 선택하세요</option>
+                <select class="menu-list">
+                  <option selected>메뉴를 선택하세요</option>
                   ${menus.map((menu, index) => 
                   `<option value=${index} >${menu}</option>`
                   )}
@@ -84,36 +50,16 @@ const contents = {
           ).join('\n')}
         </table>
         <br>
-        <button type='submit'>제출</button>
         </div>
         <br>
         <hr/>
-        <br>
-        <div>
-          <table>
-            <tr>
-              <td>Total Order Member: </td>
-              <td>${members.length}</td>
-            </tr>
-            <tr>
-              <td>Total Order Menu list: </td>
-            </tr>
-            <tr>
-              <td>${menus[3]}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
     `;
   }
 }
 
-const app = document.getElementById('app');
+const app = document.getElementById('menu-order');
 app.innerHTML = contents.render();
 
-document.getElementById('add-member-form').addEventListener('submit', async (e) => {
-  e.preventDefault(); 
-})
 
 
   
