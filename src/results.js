@@ -2,24 +2,26 @@ import { menus, drinks } from './data.js';
 
 const lists = {
   render: () => { 
-    let orderArray = localStorage.getItem('orderInfo') ? 
+    const orderArray = localStorage.getItem('orderInfo') ? 
     JSON.parse(localStorage.getItem('orderInfo')) : [];
     let menusArray;
     let drinksArray;
     const menuGetArray = orderArray.map(arr => 
       arr.menu
     );
-    console.log(menuGetArray);
-    menusArray = menuGetArray.reduce((or, i) => {
-      or[i] = (or[i] || 0) + 1
-      return or }, {});
-    console.log(menusArray);  
-
     const drinkGetArray = orderArray.map(arr => 
       arr.drink
     );
-    console.log(drinkGetArray);
-    drinksArray = drinkGetArray.reduce((or, i) => {
+
+    const menuFiltered = menuGetArray.filter(menu => menu !== '메뉴를 선택하세요');
+    console.log(menuFiltered);
+    menusArray = menuFiltered.reduce((or, i) => {
+      or[i] = (or[i] || 0) + 1
+      return or }, {});
+    console.log(menusArray);  
+    const drinkFiltered = drinkGetArray.filter(drink => drink !== '음료를 선택하세요');
+    console.log(drinkFiltered);
+    drinksArray = drinkFiltered.reduce((or, i) => {
       or[i] = (or[i] || 0) + 1
       return or }, {});
     console.log(drinksArray);  

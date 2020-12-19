@@ -1,6 +1,31 @@
 import { members, menus, drinks } from './data.js';
 
 window.onload = () => {
+  const orderArray = localStorage.getItem('orderInfo') ? 
+  JSON.parse(localStorage.getItem('orderInfo')) : [];
+  const menuGetArray = orderArray.map(arr => 
+    arr.menu
+  );
+  const drinkGetArray = orderArray.map(arr => 
+    arr.drink
+  );
+  const selectMenuArr = Array.from(document.getElementsByClassName('menu-list'));
+  selectMenuArr.map((opt, index) => {
+    if(opt === '메뉴를 선택하세요') {
+      opt.selectedIndex = parseInt(menuGetArray[index])
+    } else {
+      opt.selectedIndex = parseInt(menuGetArray[index]) + 1
+    }
+  });
+  const selectDrinkArr = Array.from(document.getElementsByClassName('drink-list'));
+  selectDrinkArr.map((opt, index) => {
+    if(opt === '음료를 선택하세요') {
+      opt.selectedIndex = parseInt(drinkGetArray[index])
+    } else {
+      opt.selectedIndex = parseInt(drinkGetArray[index]) + 1
+    }
+  });
+
   document.getElementById('name-add-btn').addEventListener('click', () => {
     const newMember = document.getElementById('name').value;
     if (newMember !== '') {
@@ -41,8 +66,9 @@ const deleteBtns = Array.from(document.getElementsByClassName('delete-btn'));
 
 const contents = {
   render: () => {  
-    let memberArray = localStorage.getItem('addMember') ? 
+    const memberArray = localStorage.getItem('addMember') ? 
     JSON.parse(localStorage.getItem('addMember')) : members;
+
     return `
       <br>
       <div>
