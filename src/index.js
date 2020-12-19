@@ -1,19 +1,26 @@
 import { members, menus, drinks } from './data.js';
 
 window.onload = () => {
-  document.getElementById('name-add-button').addEventListener('click', e => {
-    e.preventDefault();
+  document.getElementById('name-add-btn').addEventListener('click', () => {
     const newMember = document.getElementById('name').value;
     if (newMember !== '') {
       members.push(newMember);
       localStorage.setItem('addMember', JSON.stringify(members));
+      app.innerHTML = contents.render();
     }
   });
   
+const deleteBtns = Array.from(document.getElementsByClassName('delete-btn'));
+  deleteBtns.map(btn => btn.addEventListener('click', () => {
+  console.log(btn.id); 
+  members.splice(btn.id, 1);
+  localStorage.removeItem('addMember');
+  app.innerHTML = contents.render();
+  })); 
+
   const setOrder = [];
 
-  document.getElementById('submit-button').addEventListener('click', (e) => {
-    e.preventDefault();
+  document.getElementById('submit-btn').addEventListener('click', () => {
     const orderInfo = Array.from(document.getElementsByClassName('order-info'));
     orderInfo.map((oi, index) => {
       console.log(oi)
@@ -43,7 +50,7 @@ const contents = {
           <th>이름</th>
           <th>음식</th>
           <th>음료수</th>
-          ${memberArray.map( member => 
+          ${memberArray.map((member, index) => 
             `
           <tr class='order-info'>
           <td>${member}</td>
@@ -66,12 +73,16 @@ const contents = {
             <td>
               <input type='text' placeholder='기타 요구 사항' />      
             </td>
+            <td>
+              <button type='button' id='${index}' class='delete-btn' >X</button>      
+            </td>
           </tr>`
           ).join('\n')}
         </table>
         <br>
         </div>
-        <div><button type='button' id='submit-button' >제출</buttion></div>
+        <div><button type='button' id='submit-btn' >제출</buttion></div>
+       
         <br>
         <hr/>
     `;

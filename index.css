@@ -16,3 +16,11 @@ table td { padding-top: 8px;}
   justify-content: space-between;
   align-items: center;
 }
+.order th { width: 220px; }
+.table-head {
+  height: 50px;
+}
+.border-top {
+ font-weight: bold;
+ height: 70px;
+} 

@@ -13,7 +13,7 @@
     <div class='pd-r'>
     <div>
       <input type='text' id='name' placeholder='Input your name' />
-      <button type='button' id='name-add-button'>추가</button>
+      <button type='button' id='name-add-btn'>추가</button>
     </div>
     </div>
     <div><button type='button' id='reset'>Reset</button></div>
@@ -21,6 +21,7 @@
       document.getElementById('reset').addEventListener('click', async (e) => {
         e.preventDefault();
         localStorage.removeItem('orderInfo');
+        // localStorage.clear();
         location.reload();
       })
     </script>

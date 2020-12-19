@@ -33,7 +33,7 @@ const lists = {
         <div class='order'>
         <div class='menu'>
           <table>
-            <tr>       
+            <tr class='table-head'>       
               <th>Menu</th>
               <th>QTY</th>
             </tr> 
@@ -42,7 +42,7 @@ const lists = {
             <td>${menusArray[key]}</td></tr>
             `
             ).join('\n')}
-            <tr>
+            <tr class='border-top'>
               <td>Total Order : </td>
               <td>${Object.keys(menusArray).reduce((sum, key) => 
                 { return  sum + parseInt(menusArray[key])}, 0 )}</td>
@@ -52,7 +52,7 @@ const lists = {
         <br>
         <div class='drink'>  
           <table>
-          <tr>       
+          <tr class='table-head'>       
             <th>Drink</th>
             <th>QTY</th>
           </tr> 
@@ -60,8 +60,8 @@ const lists = {
             `<tr><td>${drinks[key]}</td>
             <td>${drinksArray[key]}</td></tr>
             `
-            ).join('\n')}
-          <tr>
+            ).join('\n')}  
+          <tr class='border-top'>
             <td>Total Order : </td>
             <td>${Object.keys(drinksArray).reduce((sum, key) => 
               { return  sum + parseInt(drinksArray[key])}, 0 )}</td>
